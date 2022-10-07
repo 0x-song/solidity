@@ -1,0 +1,59 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address payable",
+						"name": "x",
+						"type": "address"
+					}
+				],
+				"name": "testTransfer",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"TestAddress.sol": "TestAddress"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"TestAddress.sol": {
+			"keccak256": "0x49dfdd95f75d20345504a85bb844d16469ce3c1bdd8c14dbbd406538059dda00",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://5dc1c6458e37b3a151db0e9796477053fb6463c16117b1942d882803aa071e9e",
+				"dweb:/ipfs/QmVyBXYnhx8DHzYDsSQfmceqUM6Jzru1pPdWz4cD9RCodE"
+			]
+		}
+	},
+	"version": 1
+}

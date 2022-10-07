@@ -1,0 +1,59 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "callMethod",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"ContractReference.sol": "ContractReference"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"ContractReference.sol": {
+			"keccak256": "0x5d99e7e784bc6578a7b425ad90e70abc7dc14aa1c166f902350e22a7f72e1da6",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://2f28ad2af0cd950f2eec65abc2e9d877d283505b01b8d03e42846e3a9a3015ac",
+				"dweb:/ipfs/QmYatNEzRfb247D6meWdU5gKACnMztmqgjZSswMETgiVeA"
+			]
+		}
+	},
+	"version": 1
+}
