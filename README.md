@@ -52,10 +52,39 @@
     }
     ```
 
+    如下代码所示，每new一次合约，便会创建一个新的合约。
+
+    ```solidity
+    // SPDX-License-Identifier: SEE LICENSE IN LICENSE
+    pragma solidity ^0.8.0;
+    contract A{
+    
+        function callMethod() public returns (uint){
+            //这里发生了什么？为什么会获取不到结果？
+            //每调用一次new，那么链上肯定会生成一个新的合约，在internal txns中可以看到
+            B b = new B();
+            return b.say();
+        }
+    }
+    
+    contract B{
+    
+        function say() public pure returns (uint){
+            return 10;
+        }
+    }
+    ```
+
+    ![image-20221008085359038](README.assets/image-20221008085359038.png)
+
+    如果希望调用B合约的say方法，可以使用如下方式来进行：
+
+    
+
     地址类型还有几个比较偏向于底层的成员变量，类似于java的反射。这部分没有理解，后续需要进一步学习。
 
     > call
     >
     > Delegatecall
     >
-    > staticcall
+    > Staticcall
