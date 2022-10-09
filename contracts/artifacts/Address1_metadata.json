@@ -6,14 +6,21 @@
 	"output": {
 		"abi": [
 			{
+				"anonymous": false,
 				"inputs": [
 					{
-						"internalType": "contract B",
-						"name": "b",
-						"type": "address"
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "x",
+						"type": "uint256"
 					}
 				],
-				"name": "callMethod",
+				"name": "logdata",
+				"type": "event"
+			},
+			{
+				"inputs": [],
+				"name": "getBalance",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -21,8 +28,12 @@
 						"type": "uint256"
 					}
 				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "receive"
 			}
 		],
 		"devdoc": {
@@ -38,7 +49,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ContractReference2.sol": "A"
+			"CallTest.sol": "Address1"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -52,12 +63,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"ContractReference2.sol": {
-			"keccak256": "0x7590b73dca68f8f222024ae159d9cf01734a8dc847749ff70083a25e6d0b6b1b",
+		"CallTest.sol": {
+			"keccak256": "0x7e1db09ac5133c87f050c1127335451524a512bf209ab9e463d352b4bfbcd307",
 			"license": "SEE LICENSE IN LICENSE",
 			"urls": [
-				"bzz-raw://ea364d2d177b4ba118dff4250d3dd4a938b8482224a278839f55d2f4fa3c6698",
-				"dweb:/ipfs/QmY84p7Ub3XgGbM7tGBL2LaaS9CTt9w4nxhVw1rvNZ9urB"
+				"bzz-raw://9c45b9c671a0467deda940b1b0c92ee5715b5eae2f64b8ee152d20d7e86ce0dc",
+				"dweb:/ipfs/QmaAda8wef8efvF6WXqXkyxQSgHdrpxZfmZCGkeSYjmiGG"
 			]
 		}
 	},

@@ -32,7 +32,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ContractReference.sol": "B"
+			"ContractReference2.sol": "B"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -46,12 +46,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"ContractReference.sol": {
-			"keccak256": "0x68e666d42b709ee508bbc7535557ae97b35f06ffcb41bbf9f2a85dd69535970a",
+		"ContractReference2.sol": {
+			"keccak256": "0x7590b73dca68f8f222024ae159d9cf01734a8dc847749ff70083a25e6d0b6b1b",
 			"license": "SEE LICENSE IN LICENSE",
 			"urls": [
-				"bzz-raw://01ca154671bc403773f9091e4ac769ff6aaed9193b0c713b9a950ee16c7f1aab",
-				"dweb:/ipfs/QmNwuXq2gaLf4LbKNPa9VNJpLqEt8zNCJ6W82fhZu5SL5n"
+				"bzz-raw://ea364d2d177b4ba118dff4250d3dd4a938b8482224a278839f55d2f4fa3c6698",
+				"dweb:/ipfs/QmY84p7Ub3XgGbM7tGBL2LaaS9CTt9w4nxhVw1rvNZ9urB"
 			]
 		}
 	},
