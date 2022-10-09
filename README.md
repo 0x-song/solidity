@@ -29,7 +29,7 @@
     }
     ```
 
-  - address：地址类型来表示一个账号，地址类型有两种。address：一个20个字节的值。address payable:表示可支付地址，与address相同也是20字节。不过有其自身的成员函数transfer和send。
+  - address：地址类型来表示一个账号，地址类型有两种。address：一个20个字节的值。address payable:表示可支付地址，与address相同也是20字节。不过有其自身的成员函数transfer和send。**transfer执行失败会出异常，但是send执行失败会返回false，不会出异常。**
 
     > \<address>.balance(uint256)   以Wei为单位的地址类型的余额
     >
@@ -108,6 +108,10 @@
 
     下面这个案例其实就是transfer和call之间的区别。
 
+    transfer在进行转账时，可能会失败，因为gas问题
+
+    而使用call没有这个问题
+
     ```solidity
     // SPDX-License-Identifier: SEE LICENSE IN LICENSE
     pragma solidity ^0.8.0;
@@ -161,4 +165,71 @@
     }
     ```
 
+    call和delegatecall之间的区别
+
+    **call会切换上下文，但是delegatecall不会**
+
+    ![image-20221009193956204](README.assets/image-20221009193956204.png)
+
+    ![image-20221009194118936](README.assets/image-20221009194118936.png)
+
+    ```solidity
+    // SPDX-License-Identifier: SEE LICENSE IN LICENSE
+    pragma solidity ^0.8.0;
+    //合约被调用者
+    contract Called{
+        uint public number;
+        address public sender;
     
+        function setN(uint n) public{
+            number = n;
+            sender = msg.sender;
+        }
+    
+        event logdata(uint x);
+    
+        receive() external payable{
+            emit logdata(msg.value);
+        }
+    
+        fallback() external{}
+    
+        function getBalance() public view returns (uint){
+            return address(this).balance;
+        }
+    }
+    
+    //合约调用者 注意：caller和called合约调用者和被调用者的变量名称应该完全一致
+    contract Caller{
+        uint public number;
+        address public sender;
+    
+        function delegateCallN(address e, uint n) public{
+            bytes memory methodData = abi.encodeWithSignature("setN(uint256)", n);
+            e.delegatecall(methodData);
+        }
+    
+        function callN(address e, uint n) public{
+            bytes memory methodData = abi.encodeWithSignature("setN(uint256)", n);
+            //不晓得为啥加上gas设置之后，就没法调用了;原因是gas不足，无法调用
+            e.call{gas:300000}(methodData);
+            //e.call(methodData);
+        }
+    }
+    ```
+
+    Caller是合约的调用者；Called是合约的被调用者
+
+    在Caller中我们定义了两个方法，一个是call方法，一个是delegatecall方法。
+
+    ![image-20221009222656401](README.assets/image-20221009222656401.png)
+
+    **如果函数的运行导致变量值发生修改，那么改变的也是最终被调用者Called身上。**
+
+    ![image-20221009222954231](README.assets/image-20221009222954231.png)
+
+    ![image-20221009223017671](README.assets/image-20221009223017671.png)
+
+    **如果函数的运行导致变量值发生修改，那么改变的是Caller合约调用者里面的变量。**
+
+    ![image-20221009223312693](README.assets/image-20221009223312693.png)
