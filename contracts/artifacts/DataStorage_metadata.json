@@ -26,6 +26,20 @@
 			},
 			{
 				"inputs": [],
+				"name": "memory1",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "memory2",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "storage1",
 				"outputs": [],
 				"stateMutability": "nonpayable",
@@ -60,11 +74,11 @@
 	},
 	"sources": {
 		"DataStorage.sol": {
-			"keccak256": "0x33a8fae5be6d0deee5d88145884da9ac0f2a3d2c502979b7584734ddb1c78b46",
+			"keccak256": "0xbcb2f42c19200e69a04a07817299ef6097ce0fedcfff048d30800c0f73b1bd5a",
 			"license": "SEE LICENSE IN LICENSE",
 			"urls": [
-				"bzz-raw://4bae5091248ce9f1d24f0d4cc53dfc23b5e985a558b82a4da83d240b7997f8fe",
-				"dweb:/ipfs/QmVnyxS3mZYPD8YnRkRTCVBRBuqTabHoM4h3dWv4v7MGqe"
+				"bzz-raw://bb2ee6c6c05667ef474aa139829f9d726c456d978b82882746637987bee7cb6c",
+				"dweb:/ipfs/QmPj2WheYNoxHy8sj2JiaDaGWUYTv54D9jsFm6Nyg1FM3n"
 			]
 		}
 	},

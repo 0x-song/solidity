@@ -253,11 +253,168 @@
         }
     ```
 
-  - 不同数据位置的赋值规则：不同存储类型的数据在进行相互赋值时，有时候会产生独立的副本（也就是修改新变量的值不会影响原先变量的值），有时候会产生相互引用（修改新变量会影响原先变量的值）
+  - **不同数据位置的赋值规则**：不同存储类型的数据在进行相互赋值时，有时候会产生独立的副本（也就是修改新变量的值不会影响原先变量的值），有时候会产生相互引用（修改新变量会影响原先变量的值）
 
     - **合约的状态变量(storage)赋值给本地函数里的storage时，会创建引用，改变新变量会影响原先变量。**
+
+      ```solidity
+      // SPDX-License-Identifier: SEE LICENSE IN LICENSE
+      pragma solidity ^0.8.0;
+      
+      contract DataStorage {
+      
+          uint[] x  = [1,2,3];
+          
+          function callData1(uint[] calldata _x) public pure returns (uint[] calldata) {
+              //calldata类型的变量不可以被修改
+              //calldata arrays are read-only
+              //_x[0] = 1;
+              return _x;
+          }
+      
+          function storage1() public{
+              uint[] storage xs = x;
+              xs[0] = 100;
+          }
+      }
+      ```
 
       ![image-20221011001101675](README.assets/image-20221011001101675.png)
 
     - **合约的状态变量(storage)赋值给memory，会创建独立的副本，修改其中一个不会对另外一个产生影响。**
 
+      ```solidity
+      // SPDX-License-Identifier: SEE LICENSE IN LICENSE
+      pragma solidity ^0.8.0;
+      
+      contract DataStorage {
+      
+          uint[] x  = [1,2,3];
+          
+          function callData1(uint[] calldata _x) public pure returns (uint[] calldata) {
+              //calldata类型的变量不可以被修改
+              //calldata arrays are read-only
+              //_x[0] = 1;
+              return _x;
+          }
+      
+          function storage1() public{
+              uint[] storage xs = x;
+              xs[0] = 100;
+          }
+      
+          function memory1() public{
+              uint[] memory xm = x;
+              xm[0] = 100;
+              xm[1] = 200;
+              x[0] = 400;
+          }
+      
+      }
+      ```
+
+      ![image-20221011212314964](README.assets/image-20221011212314964.png)
+
+    - **memory赋值给memory，会创建引用。改变新变量时会修改原变量的值**。
+
+      ```solidity
+      // SPDX-License-Identifier: SEE LICENSE IN LICENSE
+      pragma solidity ^0.8.0;
+      
+      contract DataStorage {
+      
+          uint[] x  = [1,2,3];
+          
+          function callData1(uint[] calldata _x) public pure returns (uint[] calldata) {
+              //calldata类型的变量不可以被修改
+              //calldata arrays are read-only
+              //_x[0] = 1;
+              return _x;
+          }
+      
+          function storage1() public{
+              uint[] storage xs = x;
+              xs[0] = 100;
+          }
+      
+          function memory1() public{
+              //storage赋值给memory
+              uint[] memory xm = x;
+              xm[0] = 100;
+              xm[1] = 200;
+              x[0] = 400;
+          }
+      
+          function memory2() public{
+              //memory类型的变量赋值给memory，会创建引用，修改一个，另外一个也会随之修改
+              //创建memory的数组，需要使用如下方式
+              //但是目前依然有困惑：为什么不可以使用uint[] memory xm1 = [1,2,3,4]...
+              uint[] memory xm1 = new uint[](7);
+              xm1[0] = 1;
+              xm1[1] = 2;
+              xm1[2] = 3;
+              xm1[3] = 4;
+              xm1[4] = 4;
+              xm1[5] = 5;
+              xm1[6] = 6;
+              uint[] memory xm2 = xm1;
+              xm2[0] = 7;
+          }
+      }
+      ```
+
+      ![image-20221011223701870](README.assets/image-20221011223701870.png)
+  
+  - 变量的作用域
+  
+    - 状态变量：数据会存储在链上，gas消耗比较大 。类似于其他编程语言的成员变量。
+  
+      ```solidity
+      // SPDX-License-Identifier: SEE LICENSE IN LICENSE
+      pragma solidity ^0.8.0;
+      
+      contract DataStorage {
+      		//状态变量
+          uint[] x  = [1,2,3];
+      
+          function storage1() public{
+              uint[] storage xs = x;
+              xs[0] = 100;
+          }
+      
+      
+      ```
+  
+    - 局部变量：仅在函数执行过程中有效。函数退出之后，变量无效。局部变量仅存储在内存中，不上链，gas消耗低。上图的函数内部。
+  
+    - 全局变量：可以在全局内使用的变量。无需进行声明。
+  
+      > `blockhash(uint blockNumber) returns (bytes32)`: 指定区块的区块哈希,仅可用于最新的 256 个区块且不包括当前区块，否则返回 0 
+      >
+      > `block.basefee` (`uint`): 当前区块的基础费用 ([EIP-3198](https://eips.ethereum.org/EIPS/eip-3198) and [EIP-1559](https://eips.ethereum.org/EIPS/eip-1559))
+      >
+      > `block.chainid` (`uint`): 当前链 id
+      >
+      > `block.coinbase` (`address payable`): 挖出当前区块的矿工地址
+      >
+      > `block.difficulty` (`uint`): 当前区块难度
+      >
+      > `block.gaslimit` (`uint`): 当前区块 gas 限额
+      >
+      > `block.number` (`uint`): 当前区块号
+      >
+      > `block.timestamp` (`uint`): 自unix epoch 起始当前区块以秒计的时间戳
+      >
+      > `gasleft() returns (uint256)`: 剩余的gas
+      >
+      > `msg.data` (`bytes calldata`): 完整的calldata
+      >
+      > `msg.sender` (`address`): 消息发送者(当前调用者)
+      >
+      > `msg.sig` (`bytes4`): calldata的前4字节(也就是函数标识符）
+      >
+      > `msg.value` (`uint`): 随消息发送的wei的数量
+      >
+      > `tx.gasprice` (`uint`):交易的 gas 价格
+      >
+      > `tx.origin` (`address`): 交易发起者(完全的调用链)
