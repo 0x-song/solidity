@@ -1,0 +1,89 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "doSomething",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "numbers",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "remove",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"remove(uint256)": {
+					"notice": "删除数组中间某个元素时，不可以像其他编程语言一样，删除该元素，其他后面的元素往前移动 这样会消耗巨量的gas"
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"ArrayTest3.sol": "Array3"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"ArrayTest3.sol": {
+			"keccak256": "0x0254c7460300584b6466fde6e1b524b0e455425da5f537c9e591721fcc8482a3",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://e31598fb497a850f49c61aa285083d6c285c8f321c1d59f90267a05aa315afc1",
+				"dweb:/ipfs/QmWhWtwZ7UUzUx2QLSJW1NE2r8KQcBTHkX3JRZYLvXxW35"
+			]
+		}
+	},
+	"version": 1
+}
