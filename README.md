@@ -323,6 +323,7 @@
       
       contract DataStorage {
       
+      
           uint[] x  = [1,2,3];
           
           function callData1(uint[] calldata _x) public pure returns (uint[] calldata) {
@@ -349,6 +350,7 @@
               //memory类型的变量赋值给memory，会创建引用，修改一个，另外一个也会随之修改
               //创建memory的数组，需要使用如下方式
               //但是目前依然有困惑：为什么不可以使用uint[] memory xm1 = [1,2,3,4]...
+              //原因在于声明数组时必须指定数组的长度。uint[4] memory xm1 = [1,2,3,4]
               uint[] memory xm1 = new uint[](7);
               xm1[0] = 1;
               xm1[1] = 2;
@@ -362,7 +364,7 @@
           }
       }
       ```
-
+      
       ![image-20221011223701870](README.assets/image-20221011223701870.png)
   
   - 变量的作用域
@@ -418,3 +420,72 @@
       > `tx.gasprice` (`uint`):交易的 gas 价格
       >
       > `tx.origin` (`address`): 交易发起者(完全的调用链)
+  
+- 引用类型
+
+  - 数组：可以用来存储一组数据。可以分为定长数组以及不定长数组。
+
+    - 定长数组 ：在声明时就指定数组的长度，T[k]这种格式来表示
+
+    - 不定长数组(动态数组)：在声明时不指定数组的长度，T[]这种格式来表示
+
+      ```solidity
+      // SPDX-License-Identifier: SEE LICENSE IN LICENSE
+      pragma solidity ^0.8.0;
+      contract Array1{
+          //定长数组
+          uint[8] arr1;
+          bytes1[6] arr2;
+          address[3] arr3;
+      
+          //不定长数组
+          uint[] arr4;
+          bytes1[] arr5;
+          address[] arr6;
+          //bytes类型比较特殊，表示数组
+          bytes arr7;
+      }
+      ```
+
+      > 注：关于bytes，是一种特殊类型的数组。类似于byte[]，但是bytes的gas费用更低。bytes和string都可以用来表示字符串，对任意长度的原始字节数据使用bytes，对于任意长度的字符串，比如使用Unicode编码的字符，使用string
+
+    - 成员
+
+      - length:表示的是当前数组的长度
+
+      - push():只有动态数组（不定长数组）和 bytes数组拥有该成员，在末尾添加0
+
+      - push(x):只有动态数组（不定长数组）和bytes数组拥有该成员，在末尾添加x
+
+        ```solidity
+        // SPDX-License-Identifier: SEE LICENSE IN LICENSE
+        pragma solidity ^0.8.0;
+        contract Array1{
+            //定长数组
+            uint[8] arr1;
+            bytes1[6] arr2;
+            address[3] arr3;
+        
+            //不定长数组
+            uint[] arr4;
+            bytes1[] arr5;
+            address[] arr6;
+            //bytes类型比较特殊，表示数组
+            bytes arr7;
+        
+            function testArray() public {
+                //对于固定长度的数组会直接初始化数组，默认值全部为0；无法调用push方法
+                //arr1.push();
+                //只有不定长数组，也就是动态数组可以调用push方法；动态数组初始化时长度为0，无填充
+                arr4.push();
+                arr4.push(1);
+                arr4.push(2);
+                arr4.push(3);
+                arr4.push(4);
+                arr4.push(5);
+            }
+        }
+        ```
+
+      - pop():只有动态数组（不定长数组）和bytes数组拥有该成员，移除数组最后一个元素。
+

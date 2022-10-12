@@ -1,0 +1,53 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "testArray",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"ArrayTest.sol": "Array1"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"ArrayTest.sol": {
+			"keccak256": "0xcbbc74582d52339e721822bfff26a6e8a05976242a7155190bced7e43eaa86b4",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://7806ae9d18b24b84447351805a06d98ff1112caa529d3561aca6d4a76fc4b36c",
+				"dweb:/ipfs/QmNy44kBmDWjsCX3ZjjpYSfEahzNA8ZtT3GHUXM7t3k279"
+			]
+		}
+	},
+	"version": 1
+}
