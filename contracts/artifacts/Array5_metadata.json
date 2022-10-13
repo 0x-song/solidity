@@ -1,0 +1,85 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "numbers",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "remove1",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "test1",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"ArrayTest5.sol": "Array5"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"ArrayTest5.sol": {
+			"keccak256": "0x93c20d7c4ea36546933c5566da747fd908d2acf2e9714bb49d263bf0bcfdb503",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://323b086a38ba15df71593c5714f3312b1e37deeccf7350ea7ce64592ad03ca0a",
+				"dweb:/ipfs/QmQrnhipWaPtW9PHQBvVnyeYvkvAidnnQNgXfc8zmnLB2G"
+			]
+		}
+	},
+	"version": 1
+}

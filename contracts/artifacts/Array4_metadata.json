@@ -85,7 +85,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ArrayTest4.sol": "Array3"
+			"ArrayTest4.sol": "Array4"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -100,11 +100,11 @@
 	},
 	"sources": {
 		"ArrayTest4.sol": {
-			"keccak256": "0x2d48941500a2e52afd31a5fb34135c3f904753342c6023e06b7b7777f2211360",
+			"keccak256": "0xaf28194a20dfa00d071f5c4b311cadc69e212dedd640e39a8536d6e4311a6eb9",
 			"license": "SEE LICENSE IN LICENSE",
 			"urls": [
-				"bzz-raw://3e06c8192e9dfc55e4017fa4e0762659f20c17fce136d83124ff96daca11b0df",
-				"dweb:/ipfs/QmZUEnFmYEkhnshmAKmxaKsDyabFJUxPg1UJKekKbKM5sm"
+				"bzz-raw://d98c12fd61214387fae882d95595b36e29d501f0e0679ca42c8deaa822b365b7",
+				"dweb:/ipfs/QmTiK4BJs9515BS58Cge7wxxNhKvMXC3dAeRrkUudnuE9o"
 			]
 		}
 	},

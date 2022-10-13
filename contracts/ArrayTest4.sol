@@ -1,16 +1,9 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.0;
-contract Array3{
+contract Array4{
     
     uint[] public numbers;
 
-    function doSomething() public{
-        uint length = numbers.length;
-        for (uint i = 0; i < length; i++) {
-            //这里面的操作需要谨慎，因为每个节点有gasLimit
-            //如果这个循环的数量很多，操作数很多，那么就可能会无法处理请求
-        }
-    }
 
     /**
      * 删除数组中间某个元素时，不可以像其他编程语言一样，删除该元素，其他后面的元素往前移动
@@ -38,35 +31,33 @@ contract Array3{
         if(index  == length - 1){
             numbers.pop();
         }else {
-            for (uint i = index; i < numbers.length; i++) {
+            for (uint i = index; i < length - 1; i++) {
                 numbers[i] = numbers[i + 1];
             }
             numbers.pop();
         }
     }
 
-    function test1() public{
+    function test1() external{
         numbers = [1,2,3,4,5];
         remove1(2);
         // [1,2,4,5]
         assert(numbers.length == 4);
         assert(numbers[0] == 1);
         assert(numbers[1] == 2);
-        assert(numbers[2] == 4);
-        assert(numbers[3] == 5);
-
+        assert(numbers[2] == 5);
+        assert(numbers[3] == 4);
     }
 
-    function test2() public{
+    function test2() external{
         numbers = [1,2,3,4,5];
         remove2(2);
         // [1,2,4,5]
-        assert(numbers.length == 4);
-        assert(numbers[0] == 1);
-        assert(numbers[1] == 2);
-        assert(numbers[2] == 4);
-        assert(numbers[3] == 5);
-
+        // assert(numbers.length == 4);
+        // assert(numbers[0] == 1);
+        // assert(numbers[1] == 2);
+        // assert(numbers[2] == 5);
+        // assert(numbers[3] == 4);
     }
     
 }

@@ -1,0 +1,85 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "numbers",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "remove",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "test1",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"ArrayRemove.sol": "ArrayRemove"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"ArrayRemove.sol": {
+			"keccak256": "0x73a39199ba7f96f96fe6210c091934fa382bf144ed1a20620061a85cbc968337",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://37eb2efaf2e6851bf1056e93b63940bdafb3dcd4f2fac9995c685682567de382",
+				"dweb:/ipfs/QmYh1hhYLKq68AgPPx3Mt2Qkma7iBxvFiu6ZPcmEnwTZJ4"
+			]
+		}
+	},
+	"version": 1
+}
