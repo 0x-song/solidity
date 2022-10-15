@@ -1,0 +1,65 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					}
+				],
+				"name": "keccakMethod",
+				"outputs": [
+					{
+						"internalType": "bytes32",
+						"name": "",
+						"type": "bytes32"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Cryptograph.sol": "Cryptograph"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Cryptograph.sol": {
+			"keccak256": "0xb7e7132df6c0dbdfea1f931ddf08c74eef6876718fea27fc563ac92cd84231d3",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://e2259524460ca67885e9bd3659324775f6528b8720c57af4763786cc0b32c9f5",
+				"dweb:/ipfs/QmfDGeqKWQauH49VsaNn5dWXbNC5mTeHf3B77mpNec8X12"
+			]
+		}
+	},
+	"version": 1
+}

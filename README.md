@@ -383,6 +383,8 @@ contract DataStorage {
 
 #### 不同变量的作用域
 
+##### 状态变量
+
 **状态变量**：数据会存储在链上，gas消耗比较大 。类似于其他编程语言的成员变量。
 
 ```solidity
@@ -401,7 +403,11 @@ contract DataStorage {
 
 ```
 
+##### 局部变量
+
 **局部变量**：仅在函数执行过程中有效。函数退出之后，变量无效。局部变量仅存储在内存中，不上链，gas消耗低。上图的函数内部。
+
+##### 全局变量
 
 **全局变量**：可以在全局内使用的变量。无需进行声明。
 
@@ -434,6 +440,23 @@ contract DataStorage {
 > `tx.gasprice` (`uint`):交易的 gas 价格
 >
 > `tx.origin` (`address`): 交易发起者(完全的调用链)
+>
+> `keccak256((bytes memory) returns (bytes32)`:计算 Keccak-256 哈希
+
+针对keccak256，引入一个案例，顺便学习solidity中字符串的操作。
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.7;
+contract Cryptograph {
+    
+    function keccakMethod(string memory name) public returns (bytes32){
+        bytes memory b1 = bytes(name);
+        bytes32 result = keccak256(b1);
+        return result;
+    }
+}
+```
 
 #### 引用类型分类
 
@@ -662,6 +685,55 @@ contract StructTest{
 
 ![image-20221014085228677](README.assets/image-20221014085228677.png)
 
+### 映射
 
+通过key去查询value值。对于学过编程语言的同学来说，应该理解不难。
 
-​							
+**映射的规则**：
+
+- 映射的key值只可以是solidity规定的默认数据类型。不可以设置结构体。
+- 映射的存储位置必须设置为storage，映射可以作为合约的状态变量，函数内的storage变量。不能用作public函数的参数或者返回值。
+- 映射不存储key的信息，也不会有length的信息。
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.7;
+contract MappingTest {
+
+    mapping (uint => address) public numbers;
+
+    mapping (uint => uint) public intPairs;
+    
+    mapping (address => uint) public balances;
+
+    mapping (address => mapping (address => bool)) public isFriends;
+
+    function examples() external {
+        //给映射进行赋值操作
+        balances[msg.sender] = 123;
+        uint balance1 = balances[msg.sender];
+        //Explicit conversions to and from address are allowed for uint160, integer literals, bytes20 and contract types.
+        uint balance2 = balances[address(1)];
+
+        balances[msg.sender] += 123;
+        //delete操作也不是真正的删除，而是重置
+        delete balances[msg.sender];
+
+        isFriends[msg.sender][address(this)] = true;
+        //映射必须是storage类型
+        mapping (address => bool) storage friendsInfo = isFriends[msg.sender];
+        // 返回的结果是true
+        bool result = friendsInfo[address(this)];
+        //返回结果是false
+        bool result2 = friendsInfo[address(1)];
+        //testMap(balances);
+    }
+
+    //Data location must be "memory" or "calldata" for parameter in function, but none was given.
+    //但是mapping不可以设置memory或者calldata
+    // function testMap(mapping (address => uint) bals) public{
+    //     uint bal = bals[msg.sender];
+    // }
+}
+```
+

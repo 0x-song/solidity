@@ -34,7 +34,8 @@ contract StructTest{
         _car.name = "Benz";
         _car.year = 1999;
 
-        //原本是bmw，修改之后应该是马自达
+        //原本是bmw，修改之后应该是马自达 
+        //但是同时也发现一个问题，如果使用中文，会有错误的，针对unicode编码的字符需要额外进行处理
         Car storage _car2 = cars[1];
         _car2.name = "mzd";
         _car2.year = 2022;
