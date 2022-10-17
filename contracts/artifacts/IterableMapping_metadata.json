@@ -6,6 +6,19 @@
 	"output": {
 		"abi": [
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_value",
+						"type": "uint256"
+					}
+				],
+				"name": "deposit",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "first",
 				"outputs": [
@@ -76,7 +89,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "set",
+				"name": "setBalance",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -110,11 +123,11 @@
 	},
 	"sources": {
 		"IterableMapping.sol": {
-			"keccak256": "0x4726fd3cafb32d13863cca055481185c949bad978dfcf5a515133c2a721d907f",
+			"keccak256": "0xf8be4122da0bf52581d0ec3492465707c9deaecea8cbaae3470728a7f50c7fc6",
 			"license": "SEE LICENSE IN LICENSE",
 			"urls": [
-				"bzz-raw://4fa73ef7be2cd2db9fa3fd873004ab515a022fab93125351fe889e199583f262",
-				"dweb:/ipfs/QmPuUbixvygk44iajLGFKUdanDmPjvKbi6zUgJF23zbw9B"
+				"bzz-raw://a671e0d817bf0d302b5b7c25641a719e951decd9289df2a745297c31df213909",
+				"dweb:/ipfs/QmbTFXWsFWZCg5w7MrQD3QyknF3vhmxqZvTJW5Mu9KxuT7"
 			]
 		}
 	},

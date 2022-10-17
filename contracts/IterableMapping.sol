@@ -9,10 +9,10 @@ contract IterableMapping {
     address[]  keys;
 
     function deposit(uint _value) external{
-        set(msg.sender, _value);
+        setBalance(msg.sender, _value);
     }
 
-    function set(address _key, uint _value) external{
+    function setBalance(address _key, uint _value) public{
         balances[_key] = _value;
         if(!inserted[_key]){
             inserted[_key] = true;
