@@ -1,0 +1,85 @@
+{
+	"compiler": {
+		"version": "0.8.17+commit.8df45f5f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "get",
+				"outputs": [
+					{
+						"internalType": "enum EnumTest.Status",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum EnumTest.Status",
+						"name": "_sta",
+						"type": "uint8"
+					}
+				],
+				"name": "set",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "sta",
+				"outputs": [
+					{
+						"internalType": "enum EnumTest.Status",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"EnumTest.sol": "EnumTest"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"EnumTest.sol": {
+			"keccak256": "0x460dce0a4f9023a0c5cd90574b23fa4c2da4750fcae72bced0d3b661decc3b04",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://479f8439948074eb4f2cecfcb769a98efdc1f082a8d03c5f1554a6c67482bf2f",
+				"dweb:/ipfs/Qmdf8jGzUwtzqw7HkagEumQXF93sGUcvn5UmgNxAwPnhgK"
+			]
+		}
+	},
+	"version": 1
+}

@@ -254,7 +254,7 @@ Caller是合约的调用者；Called是合约的被调用者
 
 **storage**：存储。状态变量保存的位置。开销最大(生存期同contract一致，状态变量强制为storage)。
 
-**calldata**：调用数据。用于函数参数不可变存储区域(存储在内存中，不上链。但是和memory不同的是calldata变量不可以修改，类似于final、immutable等，一般用于函数的参数)。
+**calldata**：调用数据。用于函数参数不可变存储区域(存储在内存中，不上链。但是和memory不同的是calldata变量不可以修改，类似于final、immutable等，一般用于函数的参数，calldata一般更多用在参数上面，可以节省gas费用。如果使用memory类型，那么 需要再将引用类型完整的复制一遍，而calldata不需要)。
 
 ```solidity
 function callData1(uint[] calldata _x) public pure returns (uint[] calldata) {
@@ -264,6 +264,27 @@ function callData1(uint[] calldata _x) public pure returns (uint[] calldata) {
         return _x;
     }
 ```
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+contract StorageTest {
+    //状态变量的存储位置是storage
+    string public text;
+
+    //参数的变量一般设置为calldata类型；external表示是对于智能合约外部是可见的，但是内部无法调用
+    function set(string calldata _text) external{
+        text = _text;
+    }
+
+    //view表示和智能合约交互只有查询操作；pure表示既不存储，也不修改
+    function get() external view returns (string memory){
+        return text;
+    }
+}
+```
+
+
 
 #### 不同存储位置赋值规则
 
@@ -777,6 +798,72 @@ contract IterableMapping {
     function get(uint _index) external view returns (uint){
         require(_index <= keys.length - 1, "index out of bounds");
         return balances[keys[_index]];
+    }
+}
+```
+
+### 枚举
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+contract EnumTest {
+   enum Status{
+        None,
+        Pending,
+        Shipped,
+        Completed,
+        Rejected,
+        Canceled
+   }
+
+   Status public sta;
+
+   function get() view external returns (Status){
+        return sta;
+   }
+
+   function set(Status _sta) external{
+        sta = _sta;
+   } 
+}
+```
+
+### todo列表案例
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+contract TodoList {
+    struct Todo {
+        string text;
+        bool isCompleted;
+    }
+
+    Todo[] public todos;
+
+    function create(string calldata _text) external {
+        todos.push(Todo({
+            text: _text,
+            isCompleted: false
+        }));
+    }
+
+    function updateText(uint _index, string calldata _text) external {
+        todos[_index].text = _text;
+        //下面还有一种方式，适合需要修改的变量属性非常多的时候
+        //将索引_index下标的数据取出来，放到storage位置，然后再去修改
+        Todo storage todo = todos[_index];
+        todo.text = _text;
+    }
+
+    function get(uint _index) external view returns (string memory, bool){
+        Todo memory todo = todos[_index];
+        return (todo.text, todo.isCompleted);
+    }
+
+    function toggleCompleted(uint _index) external{
+        todos[_index].isCompleted = !todos[_index].isCompleted;
     }
 }
 ```
