@@ -868,3 +868,134 @@ contract TodoList {
 }
 ```
 
+### Event事件
+
+事件是EVM中日志的抽象。具有两个特征：
+
+1.响应：应用程序可以通过订阅、监听这些事件，并在前端做出响应。
+
+2.经济：事件是EVM中比较经济的存储方式。每个gas消耗2000，而存储一个新变量至少需要20000gas。
+
+
+
+**事件的声明**：
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+
+contract EventTest {
+    
+    //indexed标记可以理解为索引，在以太坊中作为一个topic来进行存储，方便筛查转账地址和接收地址的转账事件
+    //每个event事件中最多有3个标记为indexed的变量。每个indexed变量的大小固定是256bit。
+    //事件的hash、这三个indexed变量一般在EVM中被存储为topic。
+    event transfer(address indexed _from,  address indexed _to, uint val);
+}
+```
+
+如上述介绍，下图中出现的Topics[0]为此事件的`keccak256`哈希，Topics[1]为携带indexed变量的from，Topics[2]为携带indexed变量的to。Data也就是value值。
+
+![image-20221019202712393](README.assets/image-20221019202712393.png)
+
+
+
+事件的调用：
+
+如上述编写的事件，每当我们执行转账交易时，应该触发该事件。
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+
+contract EventTest {
+    
+    //indexed标记可以理解为索引，在以太坊中作为一个topic来进行存储，方便筛查转账地址和接收地址的转账事件
+    //每个event事件中最多有3个标记为indexed的变量。每个indexed变量的大小固定是256bit。
+    //事件的hash、这三个indexed变量一般在EVM中被存储为topic。
+    event transfer(address indexed _from,  address indexed _to, uint val);
+
+    function f_transfer(address _to, uint _val) external {
+        //执行转账逻辑，调用该事件
+        emit transfer(msg.sender, _to, _val);
+    }
+}
+```
+
+###  修饰器
+
+声明了函数拥有的特性。主要的使用场景是函数运行前检查，比如检查地址等。
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+
+contract EventTest {
+
+    address owner;
+
+    constructor(){
+        owner = msg.sender;
+    }
+    
+    //indexed标记可以理解为索引，在以太坊中作为一个topic来进行存储，方便筛查转账地址和接收地址的转账事件
+    //每个event事件中最多有3个标记为indexed的变量。每个indexed变量的大小固定是256bit。
+    //事件的hash、这三个indexed变量一般在EVM中被存储为topic。
+    event transfer(address indexed _from,  address indexed _to, uint val);
+
+    function f_transfer(address _to, uint _val) external {
+        //执行转账逻辑，调用该事件
+        emit transfer(msg.sender, _to, _val);
+    }
+
+    modifier ownerPermission {
+        require(msg.sender == owner);
+    }
+
+    //表示的含义是仅当是合约的拥有者才有权限去修改
+    function changeOwner(address _newOwner) external ownerPermission{
+        owner = _newOwner;
+    }
+}
+```
+
+### 继承
+
+`virtual`如果父合约中的方法希望子合约来进行重写，则需要加上该关键字。
+
+`override`子合约重写了父合约中的函数，需要加上该关键字。
+
+在下面的B合约中，存在3个函数。其中m1、m2会返回b；m3会返回a。
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+contract A {
+    
+    function m1() public virtual pure returns (string memory){
+        return "a";
+    }
+
+    function m2() public virtual pure returns (string memory){
+        return "a";
+    }
+
+    function m3() public pure returns (string memory){
+        return "a";
+    }
+}
+
+contract B is A{
+    //如果B里面没有一个方法，部署之后会有A的几个方法
+
+    function m1() public override pure returns (string memory){
+        return "b";
+    }
+
+    function m2() public override pure returns (string memory){
+        return "b";
+    }
+}
+```
+
+
+

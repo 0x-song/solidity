@@ -7,12 +7,38 @@
 		"abi": [
 			{
 				"inputs": [],
-				"name": "say",
+				"name": "m1",
 				"outputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "string",
 						"name": "",
-						"type": "uint256"
+						"type": "string"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "m2",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "m3",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
 					}
 				],
 				"stateMutability": "pure",
@@ -32,7 +58,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"ContractReference2.sol": "B"
+			"Inherit.sol": "B"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -46,12 +72,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"ContractReference2.sol": {
-			"keccak256": "0x7590b73dca68f8f222024ae159d9cf01734a8dc847749ff70083a25e6d0b6b1b",
+		"Inherit.sol": {
+			"keccak256": "0xe3e6d9992b09211f34fb06cc9059c20f023e3031dcd7a50168895de2ada3ff74",
 			"license": "SEE LICENSE IN LICENSE",
 			"urls": [
-				"bzz-raw://ea364d2d177b4ba118dff4250d3dd4a938b8482224a278839f55d2f4fa3c6698",
-				"dweb:/ipfs/QmY84p7Ub3XgGbM7tGBL2LaaS9CTt9w4nxhVw1rvNZ9urB"
+				"bzz-raw://092d6c453a22ab252894ff2fea249b7d7ba057fc8d1c0633cf993f563e4ec42f",
+				"dweb:/ipfs/QmfM2rsQYAA2jGie2sv6W3RhLfZoS91ZonSQW4BpMg6SJi"
 			]
 		}
 	},
