@@ -33,7 +33,20 @@
 			},
 			{
 				"inputs": [],
-				"name": "m3",
+				"name": "x",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "y",
 				"outputs": [
 					{
 						"internalType": "string",
@@ -58,7 +71,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"Inherit.sol": "B"
+			"MultiInherit.sol": "Z"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -72,12 +85,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"Inherit.sol": {
-			"keccak256": "0x2ae6b35801419ad446ffe8a6bc8095af484a33b9e3ec120700d661b7f6a946b4",
+		"MultiInherit.sol": {
+			"keccak256": "0xd4ba83618a761df24f917bb698a41d00c6c77629bcde71a0352b09608d7c05a5",
 			"license": "SEE LICENSE IN LICENSE",
 			"urls": [
-				"bzz-raw://c2e6ace0b276bd1c2415548ae4342b5263d5a22d5b1f0305f32bf2a0e2b9c13a",
-				"dweb:/ipfs/QmQtUjgNAHSbHcN4kNoRacVZ5xjkryRX9fT3Ukk3iK2zGf"
+				"bzz-raw://45a14ccfb5bb4be374c836cdd7da34717022508fe29a7d45b331ee016c96bbfa",
+				"dweb:/ipfs/Qmba5kSgL87b9X8ty6s2qakVv8419aPXJGfQBT4KpiLqGz"
 			]
 		}
 	},

@@ -73,11 +73,11 @@
 	},
 	"sources": {
 		"Inherit.sol": {
-			"keccak256": "0xe3e6d9992b09211f34fb06cc9059c20f023e3031dcd7a50168895de2ada3ff74",
+			"keccak256": "0x2ae6b35801419ad446ffe8a6bc8095af484a33b9e3ec120700d661b7f6a946b4",
 			"license": "SEE LICENSE IN LICENSE",
 			"urls": [
-				"bzz-raw://092d6c453a22ab252894ff2fea249b7d7ba057fc8d1c0633cf993f563e4ec42f",
-				"dweb:/ipfs/QmfM2rsQYAA2jGie2sv6W3RhLfZoS91ZonSQW4BpMg6SJi"
+				"bzz-raw://c2e6ace0b276bd1c2415548ae4342b5263d5a22d5b1f0305f32bf2a0e2b9c13a",
+				"dweb:/ipfs/QmQtUjgNAHSbHcN4kNoRacVZ5xjkryRX9fT3Ukk3iK2zGf"
 			]
 		}
 	},

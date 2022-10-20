@@ -960,6 +960,8 @@ contract EventTest {
 
 ### 继承
 
+#### 简单继承
+
 `virtual`如果父合约中的方法希望子合约来进行重写，则需要加上该关键字。
 
 `override`子合约重写了父合约中的函数，需要加上该关键字。
@@ -993,6 +995,54 @@ contract B is A{
 
     function m2() public override pure returns (string memory){
         return "b";
+    }
+}
+```
+
+#### 多重继承
+
+合约可以继承多个合约。但是需要按照辈分从高到低来编写(从基准到派生的顺序)。如果一个同名函数在多个合约中同时存在，那么子合约在继承时，必须重写，否则报错。重写在多个父合约中都存在的函数时，`override`关键字后面需要加上所有的父合约名称。
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+contract X {
+
+    function m1() public virtual pure returns (string memory) {
+        return "xm1";
+    }
+
+    function m2() public virtual pure returns (string memory){
+        return "xm2";
+    }
+
+    function x() public pure returns (string memory){
+        return "x";
+    }
+    
+}
+contract Y is X{
+    function m1() public virtual override pure returns (string memory) {
+        return "ym1";
+    }
+
+    function m2() public virtual override pure returns (string memory){
+        return "ym2";
+    }
+
+    function y() public pure returns (string memory){
+        return "y";
+    }
+}
+contract Z is X, Y{
+    //m1 m2在两个合约中都有，所以必须要重写实现
+    //m1 m2在X和Y合约中都有 ，所以override后面应该携带所有包含该函数的父合约，顺序无要求
+    function m1() public override (Y,X) pure returns (string memory){
+        return "zm1";
+    }
+
+    function m2() public override (X,Y) pure returns (string memory){
+        return "zm2";
     }
 }
 ```

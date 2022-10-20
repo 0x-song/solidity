@@ -10,7 +10,7 @@ contract A {
         return "a";
     }
 
-    function m3() public pure returns (string memory){
+    function m3() public virtual pure returns (string memory){
         return "a";
     }
 }
