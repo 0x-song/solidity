@@ -38,3 +38,25 @@ contract Z is X, Y{
         return "zm2";
     }
 }
+
+contract M is X, Y {
+
+    function m1() public override (Y,X) pure returns (string memory){
+        return "mm1";
+    }
+
+    function m2() public override (X,Y) pure returns (string memory){
+        return "mm2";
+    }
+    
+    function callParent() public pure returns (string memory){
+        //调用super.xxx方法，如果多个父合约都有，那么按照从右往左的顺序来
+        return super.m1();
+    }
+
+    function callParent2() public pure returns (string memory){
+        //调用super.xxx方法，如果多个父合约都有，那么按照从右往左的顺序来
+        //如果想调用最左的父合约，可以直接使用如下 语法来进行调用
+        return X.m1();
+    }
+}

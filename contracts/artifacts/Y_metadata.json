@@ -6,21 +6,21 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
-				"name": "m1",
-				"outputs": [
+				"anonymous": false,
+				"inputs": [
 					{
+						"indexed": false,
 						"internalType": "string",
-						"name": "",
+						"name": "message",
 						"type": "string"
 					}
 				],
-				"stateMutability": "pure",
-				"type": "function"
+				"name": "Log",
+				"type": "event"
 			},
 			{
 				"inputs": [],
-				"name": "m2",
+				"name": "foo",
 				"outputs": [
 					{
 						"internalType": "string",
@@ -28,33 +28,7 @@
 						"type": "string"
 					}
 				],
-				"stateMutability": "pure",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "x",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "pure",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "y",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "pure",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
@@ -71,7 +45,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"MultiInherit.sol": "Y"
+			"MultiInherit2.sol": "Y"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -85,12 +59,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"MultiInherit.sol": {
-			"keccak256": "0xd4ba83618a761df24f917bb698a41d00c6c77629bcde71a0352b09608d7c05a5",
+		"MultiInherit2.sol": {
+			"keccak256": "0x8fcc03456972e562459db4229bcdb402e9c3b4fa3a2cdad6458f8dd90f3db1e9",
 			"license": "SEE LICENSE IN LICENSE",
 			"urls": [
-				"bzz-raw://45a14ccfb5bb4be374c836cdd7da34717022508fe29a7d45b331ee016c96bbfa",
-				"dweb:/ipfs/Qmba5kSgL87b9X8ty6s2qakVv8419aPXJGfQBT4KpiLqGz"
+				"bzz-raw://a1fa64ceb80054910d48ed10e65155efb0228f173c08bf2ebbdffe6042c9741e",
+				"dweb:/ipfs/QmYMCsJTEdVfnuC5YG7Thvp8DPe7kqmMZQfMiq9nXdpE3V"
 			]
 		}
 	},

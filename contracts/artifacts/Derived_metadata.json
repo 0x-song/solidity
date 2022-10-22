@@ -6,39 +6,37 @@
 	"output": {
 		"abi": [
 			{
-				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": false,
-						"internalType": "string",
-						"name": "message",
-						"type": "string"
-					}
-				],
-				"name": "Log",
-				"type": "event"
-			},
-			{
-				"inputs": [],
-				"name": "foo",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
+						"internalType": "uint256",
+						"name": "_y",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "x",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
 				"inputs": [],
-				"name": "text",
+				"name": "y",
 				"outputs": [
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "",
-						"type": "string"
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -58,7 +56,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"MultiInherit2.sol": "Z"
+			"Inherit2.sol": "Derived"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -72,12 +70,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"MultiInherit2.sol": {
-			"keccak256": "0x8fcc03456972e562459db4229bcdb402e9c3b4fa3a2cdad6458f8dd90f3db1e9",
+		"Inherit2.sol": {
+			"keccak256": "0x238a4f0d8b5a51027f839d4caa7159f4a6d2540114ff9ba1779a55c1e8c8c96e",
 			"license": "SEE LICENSE IN LICENSE",
 			"urls": [
-				"bzz-raw://a1fa64ceb80054910d48ed10e65155efb0228f173c08bf2ebbdffe6042c9741e",
-				"dweb:/ipfs/QmYMCsJTEdVfnuC5YG7Thvp8DPe7kqmMZQfMiq9nXdpE3V"
+				"bzz-raw://ffe8d7a7a270850a5418e18a426a073032b4dbe920e9778c02ab51324d08883d",
+				"dweb:/ipfs/QmbwQFFjypCzFMbycBbqTqvjVp5ASNeTvgXCY6rzodFE6R"
 			]
 		}
 	},

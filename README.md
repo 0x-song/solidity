@@ -1047,5 +1047,171 @@ contract Z is X, Y{
 }
 ```
 
+#### 构造函数继承
 
+如果父合约构造函数没有参数，那么子合约在继承时无特殊注意事项。但是如果父合约有构造函数，那么子合约在继承时需要指定所有的参数。
+
+**1.一种是直接在继承列表中调用父合约的构造函数`is Base(8) `**
+
+**2.作为子合约构造函数定义头的一部分。`Base(_y * _y)`这里面主要的目的是给父合约指定参数的值，至于里面的`_y * _y`不重要 ，换成其他的也是可以的，仅仅是进行了一次运算，再赋值。**
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+contract Base {
+    uint public x;
+
+    constructor(uint _x){
+        x = _x;
+    }
+}
+
+contract Derived is Base{
+    uint public y;
+
+    constructor(uint _y) Base (_y * _y){
+        y = _y;
+    }
+}
+contract Derived2 is Base(8){
+    
+}
+```
+
+![image-20221022215920983](README.assets/image-20221022215920983.png)
+
+####  调用父合约方法
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+contract X {
+
+    function m1() public virtual pure returns (string memory) {
+        return "xm1";
+    }
+
+    function m2() public virtual pure returns (string memory){
+        return "xm2";
+    }
+
+    function x() public pure returns (string memory){
+        return "x";
+    }
+    
+}
+contract Y is X{
+    function m1() public virtual override pure returns (string memory) {
+        return "ym1";
+    }
+
+    function m2() public virtual override pure returns (string memory){
+        return "ym2";
+    }
+
+    function y() public pure returns (string memory){
+        return "y";
+    }
+}
+contract Z is X, Y{
+    //m1 m2在两个合约中都有，所以必须要重写实现
+    function m1() public override (Y,X) pure returns (string memory){
+        return "zm1";
+    }
+
+    function m2() public override (X,Y) pure returns (string memory){
+        return "zm2";
+    }
+}
+
+contract M is X, Y {
+
+    function m1() public override (Y,X) pure returns (string memory){
+        return "mm1";
+    }
+
+    function m2() public override (X,Y) pure returns (string memory){
+        return "mm2";
+    }
+    
+    function callParent() public pure returns (string memory){
+        //调用super.xxx方法，如果多个父合约都有，那么按照从右往左的顺序来
+        return super.m1();
+    }
+
+    function callParent2() public pure returns (string memory){
+        //调用super.xxx方法，如果多个父合约都有，那么按照从右往左的顺序来
+        //也可以直接使用如下语法来进行调用
+        return X.m1();
+    }
+}
+```
+
+![image-20221022220401757](README.assets/image-20221022220401757.png)
+
+
+
+
+
+
+
+
+
+
+
+**重点关注Z合约的foo函数，里面调用了super.foo(),最终return接收到的值是Y合约的值，但是通过日志打印可以发现全部合约都有被调用。返回值遵循从左往右调用的原则，但是所有父合约的方法都有被调用**。
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+contract W {
+    event Log(string message);
+
+    function foo() virtual  public returns (string memory){
+        emit Log("W.foo");
+        return "wf";
+    }
+}
+contract X is W{
+    function foo() virtual override  public returns (string  memory){
+        emit Log("X.foo");
+        super.foo();
+        return "xf";
+    }
+}
+contract Y is W{
+    function foo() virtual override public returns (string  memory){
+        emit Log("Y.foo");
+        super.foo();
+        return "yf";
+    }
+}
+contract Z is X, Y{
+
+    string public text;
+
+    function foo() override(X,Y) public returns (string memory){
+        emit Log("Z.foo");
+        text  = super.foo();
+        return text;
+        //return "zf";
+    }
+}
+```
+
+![image-20221022224245232](README.assets/image-20221022224245232.png)
+
+
+
+###  可视范围
+
+`private`:仅合约内部可见。
+
+`internal`:仅合约内部和子合约可见。
+
+`public`:合约内外均可见。
+
+`external`:仅合约外部可见。
+
+![image-20221022225756813](README.assets/image-20221022225756813.png)
 
