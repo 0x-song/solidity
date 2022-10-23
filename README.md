@@ -1217,6 +1217,12 @@ contract Z is X, Y{
 
 ### 接收Ether
 
+向合约发送ether，也就是合约接收ether的三种方式：
+
+- 部署转账
+- 通过执行函数方法转账，方法需要设置`payable`
+- 直接转账，需要实现`fallback`或者`receive`，同时设置`payable`
+
 ```solidity
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.0;
