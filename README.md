@@ -1215,3 +1215,52 @@ contract Z is X, Y{
 
 ![image-20221022225756813](README.assets/image-20221022225756813.png)
 
+### 接收Ether
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+contract Payable {
+    //标注了payable，就表示其可以接收以太坊主币
+    function deposit() external payable{
+    }
+
+    function getBalance() external view returns (uint){
+        return address(this).balance;
+    }
+}
+```
+
+上述deposit函数标记了payable属性，那么调用该方法时便可以传递ether主币。
+
+**但是如果希望部署之后的合约可以直接接收ether主币**，则需要实现如下功能。
+
+`fallback`函数在以下场景会被触发：
+
+1.当执行不存在的方法时
+
+2.直接发送ether主币时
+
+在`solidity` 0.8版本时出现了一个新的函数，`receive`函数适用于只接收ether主币的情况。
+
+![image-20221023230917121](README.assets/image-20221023230917121.png)
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+contract FallBack {
+    //给合约发送eth还有另外一种方式，可以将构造函数设置为payable，在部署合约时给合约传递
+    constructor() payable{}
+
+    event Log(string func, address sender, uint value, bytes data);
+    
+    fallback() external payable{
+        emit Log("fallback", msg.sender, msg.value, msg.data);
+    }
+
+    receive() external payable{
+        emit Log("receive", msg.sender, msg.value, "");
+    }
+}
+```
+
