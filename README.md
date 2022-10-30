@@ -1401,3 +1401,124 @@ contract B{
 }
 ```
 
+### 抽象合约和接口
+
+如果一个智能合约中有没有实现的方法，那么合约必须要标注为abstract，不然编译器会报错。
+
+```solidity
+abstract contract XXX{
+	    function doSomething() external pure returns (uint); 
+}
+```
+
+接口类似于抽象合约，但是它不实现任何功能。接口的要求如下：
+
+1. 不能包含状态变量
+2. 不能包含构造函数
+3. 不能继承除接口外的其他合约
+4. 所有函数都必须是external且不能有函数体
+5. 继承接口的合约必须实现接口定义的所有功能
+
+接口制定了一个统一的标准规范。约定了Dapp如何和合约进行交互。比如`ERC20`或者`ERC721`
+
+`ERC721`接口：
+
+```solidity
+interface IERC721 is IERC165 {
+    event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
+    event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
+    event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
+    
+    function balanceOf(address owner) external view returns (uint256 balance);
+
+    function ownerOf(uint256 tokenId) external view returns (address owner);
+
+    function safeTransferFrom(address from, address to, uint256 tokenId) external;
+
+    function transferFrom(address from, address to, uint256 tokenId) external;
+
+    function approve(address to, uint256 tokenId) external;
+
+    function getApproved(uint256 tokenId) external view returns (address operator);
+
+    function setApprovalForAll(address operator, bool _approved) external;
+
+    function isApprovedForAll(address owner, address operator) external view returns (bool);
+
+    function safeTransferFrom( address from, address to, uint256 tokenId, bytes calldata data) external;
+}
+```
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+
+interface ICounter {
+    
+    function count() external view returns (uint);
+
+    function increase() external;
+}
+//合约部署时，不是CounterImpl和CallInterface即可，接口无法进行部署
+contract CounterImpl{
+    uint public number;
+
+    function count() external view returns (uint){
+        return number;
+    }
+    //该方法和接口中的方法同名，因为调用时需要保证方法名称相同 
+    function increase() external{
+        number ++;
+    }
+    //当前方法再接口中没有，不过也不会影响最终合约的正常运行
+    function decrease() external{
+        number --;
+    }
+}
+
+contract CallInterface {
+   
+   function call1(address _address) external{
+        ICounter(_address).increase();
+        ICounter(_address).count();
+   } 
+}
+```
+
+### 异常
+
+solidity提供了三种方式抛出异常的方式：`error`、`require`、`assert`
+
+**`error`**
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+error insufficientBalance(uint available, uint required);
+
+contract ErrorException {
+   
+   function transfer(address _to, uint amount) external payable{
+        if(amount > msg.value){
+            revert insufficientBalance(msg.value, amount);
+        }
+   }
+}
+```
+
+**`require`**
+
+语法格式为：`require(检查条件，"异常的描述")`，可以直接在合约函数中直接调用，使用起来比较简单，但是缺点就是gas相较于error要高。
+
+```solidity
+function transfer(address _address, uint amout) external payable{
+	require(msg.value > amount, "balance not enough");
+	.....
+}
+```
+
+`assert`
+
+和`require`比较类似，但是它不可以解释出错的原因，用法`assert(检查条件)`
+
+推荐使用`error`

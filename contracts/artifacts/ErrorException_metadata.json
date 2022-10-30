@@ -1,0 +1,80 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "available",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "required",
+						"type": "uint256"
+					}
+				],
+				"name": "insufficientBalance",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "transfer",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Exception1.sol": "ErrorException"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Exception1.sol": {
+			"keccak256": "0x5fe8be4c5608451475456dd3d68826889fe19bc11f3fd37d5eed2b968bc63f04",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://da45cb93812b0ca742899a7643d50798dcb145665cd5c7b94d87e3a701fdc546",
+				"dweb:/ipfs/QmYSgfZm42yioCFDdv7FFj4RqXAfCJ9Z8GSobVaP4GcvwB"
+			]
+		}
+	},
+	"version": 1
+}

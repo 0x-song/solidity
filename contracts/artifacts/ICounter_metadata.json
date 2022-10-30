@@ -1,0 +1,66 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "count",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "increase",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Interface.sol": "ICounter"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Interface.sol": {
+			"keccak256": "0x47d8d6447121c384fe07fac25ad7d68631c45384225f76631aab49e0c8b9387e",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://3a37915a0d58fe489261502f637666ddc5d1f9769024117f2ca7ede67e3cbe98",
+				"dweb:/ipfs/QmaTseAKiRSjhSK5iVRUHRS9r35EM6QaAVVhJfx2UufbFt"
+			]
+		}
+	},
+	"version": 1
+}
