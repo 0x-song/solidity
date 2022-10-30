@@ -6,83 +6,50 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
-				"name": "bal",
-				"outputs": [
+				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
+						"internalType": "string",
+						"name": "_message",
+						"type": "string"
 					}
 				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "getX",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "getXAndEther",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
+				"name": "executeFailed",
+				"type": "error"
 			},
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "_x",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
 					}
 				],
-				"name": "setX",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_x",
-						"type": "uint256"
-					}
-				],
-				"name": "setXAndReceiveEther",
+				"name": "call1",
 				"outputs": [],
 				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_addr",
+						"type": "address"
+					}
+				],
+				"name": "callNonExist",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
-				"name": "x",
+				"name": "data",
 				"outputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "bytes",
 						"name": "",
-						"type": "uint256"
+						"type": "bytes"
 					}
 				],
 				"stateMutability": "view",
@@ -102,7 +69,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"CallContract.sol": "B"
+			"CallTest2.sol": "B"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -116,12 +83,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"CallContract.sol": {
-			"keccak256": "0x1ec7aca6e78eb2b641f19fe0045fc1e1e5027dfc20dfe12a80672c3e5506b4b3",
+		"CallTest2.sol": {
+			"keccak256": "0xe7bc80a93d1b8c31bedf7ca095a392f1301711f0d0666558ef3e43c6160b7474",
 			"license": "SEE LICENSE IN LICENSE",
 			"urls": [
-				"bzz-raw://ca18d050742aed4436676f6492e6294a903d4abdd0438e7a09d840945643ed13",
-				"dweb:/ipfs/QmbUNPXCnGuqrKaEU5kkrfAo6qnikHTrvbBaf3Xu4vquQS"
+				"bzz-raw://f5e696287d8de9018e3c2fd7fed8b10d3ad7d2de4b3fd5bb90bc29aeb0adb632",
+				"dweb:/ipfs/QmRVqmDnC7ZQubQkW1nSptmL8AdZf1Uk3EUGLNE9WxQifi"
 			]
 		}
 	},

@@ -1522,3 +1522,70 @@ function transfer(address _address, uint amout) external payable{
 和`require`比较类似，但是它不可以解释出错的原因，用法`assert(检查条件)`
 
 推荐使用`error`
+
+## 高级语法
+
+### 低级Call
+
+在前面的案例中，我们介绍过使用`call`来发送ETH主币。今天我们将利用`Call`来调用另一个合约。
+
+`call` 是`address`类型的低级成员函数，它用来与其他合约交互。它的返回值为`(bool, data)`，分别对应`call`是否成功以及目标函数的返回值。
+
+`call`是官方推荐的发送ETH的方法。
+
+不推荐使用`call`来调用另一个合约。
+
+`call`的使用方式如下：
+
+`目标合约地址.call((abi.encodeWithSignature(...)))`
+
+其中二进制编码由上述括号内的代码来实现。
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+error executeFailed(string _message);
+contract A {
+    uint public x;
+    string public message;
+
+    event Log(string _message);
+
+    receive() external payable{}
+
+    // fallback() external payable {
+    //     emit Log("fallback executed");
+    // }
+
+    function m1(string memory _message, uint _x) external payable returns (bool, uint){
+        x = _x;
+        message = _message;
+        return (true, 10086);
+    }
+}
+
+contract B {
+
+    bytes public data;
+
+    function call1(address _addr) external payable{
+        //特别注意，此处uint必须要写成uint256类型
+        //abi二进制编码的时候千万不要多了一个空格
+       (bool result, bytes memory _data) = _addr.call{value:1234,gas:100000}(abi.encodeWithSignature("m1(string,uint256)", "hello call", 1234));
+        if(!result){
+            revert executeFailed("call failed");
+        }
+        // require(result, "call failed");
+        data = _data;
+    }
+
+    function callNonExist(address _addr) external {
+       (bool result, ) =  _addr.call(abi.encodeWithSignature("nonExist()"));
+       if(!result){
+        revert executeFailed("call none exist function");
+       }
+        require(result, "call non-exists function");
+    }
+}
+```
+
