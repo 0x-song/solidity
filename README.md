@@ -1589,3 +1589,20 @@ contract B {
 }
 ```
 
+### delegatecall
+
+和`call`比较类似。`delegatecall`表示委托调用的意思。下图表示的是`call`和`delegatecall`之间的区别：
+
+**用户A通过call合约B再call合约C的时候，执行的是合约C的函数。语境也是C的：msg.sender是B，如果函数改变了一些状态变量，产生的效果也会作用于C的变量上。**
+
+![call的语境](README.assets/VgMR533pA8WYtE5Lr65mQ.png)
+
+**用户A通过call合约B再delegatecall合约C的时候，执行的是C的合约的函数，但是语境依然是B的：msg.sender是A的地址，如果函数改变一些状态变量，产生的效果会作用于合约B的变量上。**
+
+![delegatecall的语境](README.assets/JucQiWVixdlmJl6zHjCSI.png)
+
+**使用场景**：暂不理解
+
+1. 代理合约（`Proxy Contract`）：将智能合约的存储合约和逻辑合约分开：代理合约（`Proxy Contract`）存储所有相关的变量，并且保存逻辑合约的地址；所有函数存在逻辑合约（`Logic Contract`）里，通过`delegatecall`执行。当升级时，只需要将代理合约指向新的逻辑合约即可。
+2. EIP-2535 Diamonds（钻石）：钻石是一个支持构建可在生产中扩展的模块化智能合约系统的标准。钻石是具有多个实施合同的代理合同。 更多信息请查看：[钻石标准简介](https://eip2535diamonds.substack.com/p/introduction-to-the-diamond-standard)。
+
