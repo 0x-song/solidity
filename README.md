@@ -1606,3 +1606,48 @@ contract B {
 1. 代理合约（`Proxy Contract`）：将智能合约的存储合约和逻辑合约分开：代理合约（`Proxy Contract`）存储所有相关的变量，并且保存逻辑合约的地址；所有函数存在逻辑合约（`Logic Contract`）里，通过`delegatecall`执行。当升级时，只需要将代理合约指向新的逻辑合约即可。
 2. EIP-2535 Diamonds（钻石）：钻石是一个支持构建可在生产中扩展的模块化智能合约系统的标准。钻石是具有多个实施合同的代理合同。 更多信息请查看：[钻石标准简介](https://eip2535diamonds.substack.com/p/introduction-to-the-diamond-standard)。
 
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+//合约调用发起者
+contract B {
+    uint public num;
+
+    address public sender;
+
+    //通过发起call调用
+    function callSetVariable(address _addr, uint _num) external payable{
+       (bool result, bytes memory data) = _addr.call(abi.encodeWithSignature("setVariable(uint256)", _num));
+    }
+
+    //发起delegatecall
+    function delegateCallSetVariable(address _addr, uint _num) external payable{
+        (bool result, bytes memory data) = _addr.delegatecall{gas:100000}(abi.encodeWithSignature("setVariable(uint256)", _num));
+    }
+}
+//合约被调用者
+contract C {
+    uint public num;
+
+    address public sender;
+
+    function setVariable(uint _num) public payable{
+        num = _num;
+        sender = msg.sender;
+    }
+}
+```
+
+调用 delegatecall：
+
+EOA-----call B-----delegatecall C，变量的修改会发生在合约中。msg.sender=EOA
+
+![image-20221101233114161](README.assets/image-20221101233114161.png)
+
+EOA-----call B------call C
+
+变量的修改会发生在合约C中。msg.sender也会是B
+
+![image-20221101233311333](README.assets/image-20221101233311333.png)
+
+delegatecall的主要使用场景是用在合约升级中？？？？？
