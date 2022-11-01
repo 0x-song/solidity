@@ -11,7 +11,7 @@ contract B {
        (bool result, bytes memory data) = _addr.call(abi.encodeWithSignature("setVariable(uint256)", _num));
     }
 
-    //发起delegatecall
+    //发起delegatecall，delegatecall不可以设置发送的 ether主币，只可以设置gas
     function delegateCallSetVariable(address _addr, uint _num) external payable{
         (bool result, bytes memory data) = _addr.delegatecall{gas:100000}(abi.encodeWithSignature("setVariable(uint256)", _num));
     }
