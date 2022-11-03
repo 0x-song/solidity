@@ -1,0 +1,78 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "accounts",
+				"outputs": [
+					{
+						"internalType": "contract Account",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					}
+				],
+				"name": "createAccount",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"CreateContract.sol": "AccountFactory"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"CreateContract.sol": {
+			"keccak256": "0x2d88bd029dcb148cefa64cd60441ae61c53f7c8a86a0d3fed8903448da628b72",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://9d7f71066f01466e2b11752fbaef2bd405147f4a74db8e949513a973dba25b33",
+				"dweb:/ipfs/QmReg3my21UmVkYZLnELtDsEUYXgmu1GfEHkH8eKT4C9Pt"
+			]
+		}
+	},
+	"version": 1
+}
