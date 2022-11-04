@@ -1777,3 +1777,93 @@ contract PairFactory{
 }
 ```
 
+### 库合约
+
+库合约就是类似其他编程语言中写的工具类、类库、jar包等等。
+
+库合约的特征如下：
+
+1. **不能存在除了constant之外的状态变量**
+2. 不能够继承或被继承
+3. 不能接收以太币
+4. 不可以被销毁
+
+![image-20221104233107588](README.assets/image-20221104233107588.png)
+
+库合约的使用方式如下代码所示：两种
+
+1.using xxx for xxx
+
+2.库合约.xxx方法
+
+
+
+```solidity
+library Strings {
+    bytes16 private constant _HEX_SYMBOLS = "0123456789abcdef";
+
+    bytes array;
+    
+    function toString(uint256 value) public pure returns (string memory) {
+        if (value == 0) {
+            return "0";
+        }
+        uint256 temp = value;
+        uint256 digits;
+        while (temp != 0) {
+            digits++;
+            temp /= 10;
+        }
+        bytes memory buffer = new bytes(digits);
+        while (value != 0) {
+            digits -= 1;
+            buffer[digits] = bytes1(uint8(48 + uint256(value % 10)));
+            value /= 10;
+        }
+        return string(buffer);
+    }
+
+    
+    function toHexString(uint256 value) public pure returns (string memory) {
+        if (value == 0) {
+            return "0x00";
+        }
+        uint256 temp = value;
+        uint256 length = 0;
+        while (temp != 0) {
+            length++;
+            temp >>= 8;
+        }
+        return toHexString(value, length);
+    }
+
+    function toHexString(uint256 value, uint256 length) public pure returns (string memory) {
+        bytes memory buffer = new bytes(2 * length + 2);
+        buffer[0] = "0";
+        buffer[1] = "x";
+        for (uint256 i = 2 * length + 1; i > 1; --i) {
+            buffer[i] = _HEX_SYMBOLS[value & 0xf];
+            value >>= 4;
+        }
+        require(value == 0, "Strings: hex length insufficient");
+        return string(buffer);
+    }
+}
+contract A {
+
+    //库合约使用方式一
+    using Strings for uint256;
+    
+    function getString1(uint256 _number) external pure returns (string memory){
+        return _number.toHexString();
+    }
+
+    //库合约使用方式二：
+    function getString2(uint256 _number) external pure returns (string memory){
+        return Strings.toHexString(_number);
+    }
+}
+```
+
+
+

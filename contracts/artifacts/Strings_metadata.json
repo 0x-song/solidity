@@ -9,11 +9,16 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "_number",
+						"name": "value",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "length",
 						"type": "uint256"
 					}
 				],
-				"name": "getString1",
+				"name": "toHexString",
 				"outputs": [
 					{
 						"internalType": "string",
@@ -28,11 +33,30 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "_number",
+						"name": "value",
 						"type": "uint256"
 					}
 				],
-				"name": "getString2",
+				"name": "toHexString",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "toString",
 				"outputs": [
 					{
 						"internalType": "string",
@@ -46,7 +70,11 @@
 		],
 		"devdoc": {
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"toHexString(uint256)": {
+					"details": "Converts a `uint256` to its ASCII `string` hexadecimal representation."
+				}
+			},
 			"version": 1
 		},
 		"userdoc": {
@@ -57,7 +85,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"LibraryDemo.sol": "A"
+			"LibraryDemo.sol": "Strings"
 		},
 		"evmVersion": "london",
 		"libraries": {},
