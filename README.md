@@ -1777,6 +1777,16 @@ contract PairFactory{
 }
 ```
 
+#### create2
+
+
+
+
+
+### 删除合约
+
+
+
 ### 库合约
 
 库合约就是类似其他编程语言中写的工具类、类库、jar包等等。
@@ -1795,8 +1805,6 @@ contract PairFactory{
 1.using xxx for xxx
 
 2.库合约.xxx方法
-
-
 
 ```solidity
 library Strings {
@@ -1865,5 +1873,46 @@ contract A {
 }
 ```
 
+### 哈希运算
 
+哈希运算的特征：
+
+单向性：得到某个数的哈希值是一个非常简单的过程，但是反过来却非常难。
+
+雪崩性：数值的细微改变都会引起哈希值发生较大的变化。
+
+一致性：同一个数值经过同一个哈希运算，无论执行多少次结果都是一致的。
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+contract HashFunction {
+    
+    //为什么这里的return bytes32不需要加memory，因为bytes32是定长数组；不定长数组需要添加
+    //默认基本类型，不需要刻意指定 存储类型；struct、动态数组、映射、string等引用类型必须指定存储类型，否则编译会报异常
+    function hash1(string memory _text, uint _num, address _address) external pure returns (bytes32) {
+        //使用hash运算用固定函数,计算之前将数据进行打包。可以有两种方式 abi.encodePacked  abi.encode
+        return keccak256(abi.encodePacked(_text, _num, _address));
+    }
+    function hash2(string memory _text, uint _num, address _address) external pure returns (bytes32) {
+        //使用hash运算用固定函数,计算之前将数据进行打包。可以有两种方式 abi.encodePacked  abi.encode
+        return keccak256(abi.encode(_text, _num, _address));
+    }
+    //“AAA”,"AAAA":bytes: 0x00000000000000000000000000000000000000000000000000000000000000400000000000000
+    //00000000000000000000000000000000000000000000000008000000000000000000000000000000000000
+    //00000000000000000000000000009e2809c414141e2809d00000000000000000000000000000000000000000
+    //0000000000000000000000000000000000000000000000000000000000000000000044141414100000000000
+    //000000000000000000000000000000000000000000000
+    function encode(string memory _text1, string memory _text2) external pure returns (bytes memory){
+        return abi.encode(_text1, _text2);
+    }
+
+    //bytes: 0xe2809c414141e2809d41414141
+    function encodePacked(string memory _text1, string memory _text2) external pure returns (bytes memory){
+        return abi.encodePacked(_text1, _text2);
+    }
+}
+```
+
+![image-20221105224515342](README.assets/image-20221105224515342.png)
 
