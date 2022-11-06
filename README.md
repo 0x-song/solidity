@@ -1779,13 +1779,115 @@ contract PairFactory{
 
 #### create2
 
+`create2`可以使得智能合约在部署之前便可以得到合约的地址。
 
+create方式生成合约地址的方式是
 
+```
+hash(创建者地址, nonce)
+```
 
+虽然创建者地址是不变的，但是nonce的值却会随着时间而改变。因此使用`create`无法预测合约的地址。
+
+`create2`可以通过提前计算出合约的地址。计算的数据主要由4部分组成：
+
+- `0xFF`:一个常数
+- 创建者地址
+- salt：加盐处理。
+- 待部署合约的字节码(`bytecode`)
+
+`create2`的使用方式和`create`非常类似，只是需要传递`salt`。如果构造函数有参数，则传递入`params`参数，如果构造函数是`payable`，则可以在创建合约时传递_value数值的ETH主币。
+
+```solidity
+Contract contract = new Contract{salt : _salt, value : _value}(params);
+```
+
+创建出来的合约地址和验证的合约地址是一致的。
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+contract Pair {
+
+    address public factory;
+
+    address public token1;
+
+    address public token2;
+
+    constructor() {
+        factory = msg.sender;
+    }
+
+    function initialize(address _token1, address _token2) external {
+        token1 = _token1;
+        token2 = _token2;
+    }
+}
+
+contract PairFactory2{
+
+    mapping (address => mapping (address => address)) public tokenPair;
+
+    //保存所有的合约地址信息
+    address[] public tokenPairs;
+
+    function createPair2(address _token1, address _token2) external returns (address pairAddress){
+        require(_token1 != _token2, "could not create same token pair");
+        //这一步为了保证输入不同的地址对得到的顺序是一致的，后面要进行哈希运算
+        (address token1, address token2) = _token1 < _token2 ? (_token1, _token2) : (_token2, _token1);
+        bytes32 salt = keccak256(abi.encodePacked(token1, token2));
+        //使用create2创建新的合约 salt是bytes32位的
+        Pair pair = new Pair{salt : salt}();
+        pair.initialize(token1, token2);
+        pairAddress = address(pair);
+        tokenPairs.push(pairAddress);
+        tokenPair[token1][token2] = pairAddress;
+        tokenPair[token2][token1]  = pairAddress;
+    }
+
+    function calculateAddress(address _token1, address _token2) public view returns (address predicatedAddress){
+        require(_token1 != _token2, "could not create same token pair");
+        //这一步为了保证输入不同的地址对得到的顺序是一致的，后面要进行哈希运算
+        (address token1, address token2) = _token1 < _token2 ? (_token1, _token2) : (_token2, _token1);
+        bytes32 salt = keccak256(abi.encodePacked(token1, token2));
+        //需要四个参数：0xff、当前创建者合约地址、盐、bytecode
+        bytes32 hashcode = keccak256(abi.encodePacked(bytes1(0xff), address(this), salt, keccak256(type(Pair).creationCode)));
+        predicatedAddress = address(uint160(uint(hashcode)));
+    }
+}
+```
 
 ### 删除合约
 
+删除合约之后，再与合约交互时，不会有任何响应。
 
+删除合约，会将合约内的主币强制转给当前合约的调用者。
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+contract KillSelf{
+
+    constructor() payable{}
+
+    function kill() external {
+        selfdestruct(payable(msg.sender));
+    }
+}
+contract HelperContract{
+
+    function destroy(KillSelf _kill) external{
+        _kill.kill();
+    }
+
+    function getBalance() external view returns (uint){
+        return address(this).balance;
+    }
+}
+```
+
+![image-20221106235231628](README.assets/image-20221106235231628.png)
 
 ### 库合约
 
@@ -1915,4 +2017,66 @@ contract HashFunction {
 ```
 
 ![image-20221105224515342](README.assets/image-20221105224515342.png)
+
+###  Import
+
+通过`import`指令可以将外部的合约引入到当前合约内部中来进行使用。
+
+```solidity
+import {HashFunction as Hash1} from "./HashFunction.sol";
+```
+
+将当前目录下某个合约文件导入到当前合约中来进行使用。{}内部是对合约名称取了一个别名，防止导入多个同名合约时混淆的问题。
+
+```solidity
+import {Address} from'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol';
+```
+
+下面这种方式是导入一个网络中存在的合约到当前合约中。
+
+因为导入的Address是一个library。所以使用方式有以下两种
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+import {HashFunction as Hash1} from "./HashFunction.sol";
+import {Address} from'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol';
+contract A {
+   
+   Hash1 hash = new Hash1();
+
+   //因为Address这个合约是library，所以不可以直接new
+   using Address for address;
+
+   function importDemo1(string memory _text, uint _num, address _address) external view returns (bytes32){
+        return hash.hash1(_text, _num, _address);
+   }
+
+   function importDemo2(address _address) external view returns (bool){
+      return _address.isContract();
+   }
+}
+```
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+import {HashFunction as Hash1} from "./HashFunction.sol";
+import {Address} from'https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol';
+contract A {
+   
+   Hash1 hash = new Hash1();
+   
+   function importDemo1(string memory _text, uint _num, address _address) external view returns (bytes32){
+        return hash.hash1(_text, _num, _address);
+   }
+
+	//library合约的另外一种使用方式
+   function importDemo2(address _address) external view returns (bool){
+      return Address.isContract(_address);
+   }
+}
+```
+
+### ABI
 

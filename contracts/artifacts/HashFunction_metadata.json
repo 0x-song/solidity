@@ -125,7 +125,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"HashFunciton.sol": "HashFunction"
+			"HashFunction.sol": "HashFunction"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -139,12 +139,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"HashFunciton.sol": {
-			"keccak256": "0xbafa7ab4785abe1979fcf46aa995aae78ce159056466420f6e89510bb17d5fc2",
+		"HashFunction.sol": {
+			"keccak256": "0x3dc1d239df846ea9711ebd2b7d57b3ca3e3497dff661c859087342e18963add0",
 			"license": "SEE LICENSE IN LICENSE",
 			"urls": [
-				"bzz-raw://173e824455d80bee6c58a0b129e90a23e993b3625ed22155fdb89b7ca43a66d9",
-				"dweb:/ipfs/QmVwGwojvNiHBZX1yYryQ2zeMrLNRxvyP6BBqYBunPCuQf"
+				"bzz-raw://6c4953fd36f0bc84875c72f914a5d6e256e5fb0ff1db4ef8449f16de6962ef93",
+				"dweb:/ipfs/QmR8j6ABtmzWERh7eY57DDzcHvjAjJeGEpJoFHoKexe4hA"
 			]
 		}
 	},

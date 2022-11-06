@@ -8,39 +8,49 @@
 			{
 				"inputs": [
 					{
+						"internalType": "string",
+						"name": "_text",
+						"type": "string"
+					},
+					{
 						"internalType": "uint256",
-						"name": "_number",
+						"name": "_num",
 						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
 					}
 				],
-				"name": "getString1",
+				"name": "importDemo1",
 				"outputs": [
 					{
-						"internalType": "string",
+						"internalType": "bytes32",
 						"name": "",
-						"type": "string"
+						"type": "bytes32"
 					}
 				],
-				"stateMutability": "pure",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "_number",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
 					}
 				],
-				"name": "getString2",
+				"name": "importDemo2",
 				"outputs": [
 					{
-						"internalType": "string",
+						"internalType": "bool",
 						"name": "",
-						"type": "string"
+						"type": "bool"
 					}
 				],
-				"stateMutability": "pure",
+				"stateMutability": "view",
 				"type": "function"
 			}
 		],
@@ -57,7 +67,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"LibraryDemo.sol": "A"
+			"ImportContract2.sol": "A"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -71,11 +81,28 @@
 		"remappings": []
 	},
 	"sources": {
-		"LibraryDemo.sol": {
-			"keccak256": "0xad06eb9c4e81d833f1b609c2a7d8c60e5934186ddd6670a3a39c5c348a6ed995",
+		"HashFunction.sol": {
+			"keccak256": "0x3dc1d239df846ea9711ebd2b7d57b3ca3e3497dff661c859087342e18963add0",
+			"license": "SEE LICENSE IN LICENSE",
 			"urls": [
-				"bzz-raw://a21a3756105df21d10ffbdd0dad6d30b6904b9ddda667cdf4046aa96fe52b86d",
-				"dweb:/ipfs/QmUEAdC18GND8LHdSGuzz4Z37BHXyfWAgnEF2hMgU452c9"
+				"bzz-raw://6c4953fd36f0bc84875c72f914a5d6e256e5fb0ff1db4ef8449f16de6962ef93",
+				"dweb:/ipfs/QmR8j6ABtmzWERh7eY57DDzcHvjAjJeGEpJoFHoKexe4hA"
+			]
+		},
+		"ImportContract2.sol": {
+			"keccak256": "0x1d130b2355aa167b758800fcf6cd54528f620a2525c7e41393bfeffa88b817e5",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://8c2c101ee7652fe034a31f964cfb9404cfb3ee76767754bc7e29ac4a6d98ba41",
+				"dweb:/ipfs/QmQS6rDPy9BbQYk4K4K6pxGxHASkDcKenBAksxVRX3w99x"
+			]
+		},
+		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Address.sol": {
+			"keccak256": "0xb94eac067c85cd79a4195c0a1f4a878e9827329045c12475a0199f1ae17b9700",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2ad84b5dbf40ba9e944cc25bd0a98c51bafd49cff30efe5ef5aef921a70081de",
+				"dweb:/ipfs/Qme8iCeqe9VdNgWktTTsSxUfHcJEXuvPaJpshWDzoWj56V"
 			]
 		}
 	},

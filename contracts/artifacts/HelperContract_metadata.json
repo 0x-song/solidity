@@ -1,0 +1,72 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "contract KillSelf",
+						"name": "_kill",
+						"type": "address"
+					}
+				],
+				"name": "destroy",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"SelfDestruct.sol": "HelperContract"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"SelfDestruct.sol": {
+			"keccak256": "0x9dfbd00d38011e0ee2753c0c22f8f57a6dc80ba03c91107dd568d9215caae6ec",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://d8a455330dd5893c7bf65bd236263302b90a65b5b489443f0e8986b17f4ace21",
+				"dweb:/ipfs/QmeW1YymHE8MUZCfKUgyejssozPVHqh7Q3uZAb8XVLP72i"
+			]
+		}
+	},
+	"version": 1
+}
