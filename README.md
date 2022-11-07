@@ -2133,3 +2133,29 @@ contract ABIEncodeAndDecode {
 ```
 
 ![image-20221107235103600](README.assets/image-20221107235103600.png)
+
+
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+contract ABIEncode2 {
+
+    //abi.encode可以使用abi.decode来进行解码
+    function encode(uint _a, address _b, uint[] calldata _c) external pure returns (bytes memory){
+        return abi.encode(_a, _b, _c);
+    }
+    
+    function encodeWithSignature(uint _a, address _b, uint[] calldata _c) external pure returns (bytes memory){
+        return abi.encodeWithSignature("encode(uint256,address,uint256[])", _a, _b, _c);
+    }
+
+    function encodeWithSelector(uint _a, address _b, uint[] calldata _c) external pure returns (bytes memory){
+        return abi.encodeWithSelector(bytes4(keccak256("encode(uint256,address,uint256[])")), _a, _b, _c);
+    }
+}
+```
+
+![image-20221108000439433](README.assets/image-20221108000439433.png)
+
+和java中的反射比较类似。找到方法的参数签名，利用传递进来的参数，进而调用相应的函数。
