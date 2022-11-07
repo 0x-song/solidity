@@ -254,7 +254,7 @@ Caller是合约的调用者；Called是合约的被调用者
 
 **storage**：存储。状态变量保存的位置。开销最大(生存期同contract一致，状态变量强制为storage)。
 
-**calldata**：调用数据。用于函数参数不可变存储区域(存储在内存中，不上链。但是和memory不同的是calldata变量不可以修改，类似于final、immutable等，一般用于函数的参数，calldata一般更多用在参数上面，可以节省gas费用。如果使用memory类型，那么 需要再将引用类型完整的复制一遍，而calldata不需要)。
+**calldata**：调用数据。用于函数参数不可变存储区域(存储在内存中，不上链。但是和memory不同的是calldata变量不可以修改，类似于final、immutable等，一般用于函数的参数，calldata一般更多用在参数上面，可以节省gas费用。如果使用memory类型，那么需要再将引用类型完整的复制一遍，而calldata不需要)。
 
 ```solidity
 function callData1(uint[] calldata _x) public pure returns (uint[] calldata) {
@@ -2080,3 +2080,56 @@ contract A {
 
 ### ABI
 
+`ABI`全称为Application Binary Interface.应用二进制接口，是和以太坊智能合约进行交互的标准。我们要将数据发送到合约，或者和合约进行交互，需要以一种合约可以识别的方式。也就是说，它们需要被编码。执行编码操作就需要使用到`ABI`。
+
+#### 编码
+
+在`solidity`中一共有4种方式可以用来进行编码：`abi.encode()`、`abi.encodePacked()`、`abi.encodeWithSignature()`、`abi.encodeWithSelector()`。
+
+`abi.encode()`
+
+会将每个参数填充为32个字节的数据，并且最终拼接在一起。如果需要和合约进行交互，那么需要使用该方法。
+
+`abi.encodePacked()`
+
+将参数按照所需最小空间进行编码。和上面比较类似，但是会将填充的很多0去掉。比如uint只会用一个字节来表示。当希望节省空间，同时不希望与合约进行交互的时候可以使用。比如进行哈希运算时。
+
+`abi.encodeWithSignature()`
+
+和`abi.encode()`比较类似，只不过会在`abi.encode()`编码结果前面加上4个字节的函数选择器（就是通过函数名称和函数参数进行签名来标识函数）。**只不过第一个参数为函数签名**。`方法名(方法参数类型)`。在调用其他合约的函数时使用。
+
+`abi.encodeWithSelector()`
+
+和`abi.encodeWithSignature()`的功能基本类似。**只不过第一个参数为函数选择器**。为函数签名keccak256哈希值的前4个字节。
+
+#### 解码
+
+可以将`abi.encode`编码的结果进行解码。还原成原本的数据。
+
+下面这个案例讲解了`encode`和`decode`的使用。
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+contract ABIEncodeAndDecode {
+    struct Car {
+        string name;
+        uint[] nums;
+    }
+    //abi.encode可以使用abi.decode来进行解码
+    function encode(uint _a, address _b, uint[] calldata _c, Car calldata _d) external pure returns (bytes memory){
+        return abi.encode(_a, _b, _c, _d);
+    }
+    
+    //Furthermore, structs as well as nested arrays are not supported.不支持struct
+    function encodePacked(uint _a, address _b, uint[] calldata _c) external pure returns (bytes memory){
+        return abi.encodePacked(_a, _b, _c);
+    }
+
+    function decode(bytes calldata data) external pure returns (uint _a, address _b, uint[] memory _c, Car memory _d){
+        (_a, _b, _c, _d) = abi.decode(data, (uint, address, uint[], Car));
+    }
+}
+```
+
+![image-20221107235103600](README.assets/image-20221107235103600.png)
