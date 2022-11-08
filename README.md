@@ -2159,3 +2159,65 @@ contract ABIEncode2 {
 ![image-20221108000439433](README.assets/image-20221108000439433.png)
 
 和java中的反射比较类似。找到方法的参数签名，利用传递进来的参数，进而调用相应的函数。
+
+### 选择器
+
+当我们调用智能合约时，我们实际上是向合约提交发送了一段数据。在remix中`input`可以完整的显示该内容。发送的数据中前4个字节是`selector`，也就是**函数选择器**。
+
+**`msg.data`是一个全局变量**。其中里面的值是调用函数时传递的完整数据。
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+contract SelectDemo {
+    
+    event Log(bytes data);
+
+    //当我们调用m1方法时，传递过去的完整参数会保存在msg.data全局变量中
+    // 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
+    // input:0x0c7dff020000000000000000000000005b38da6a701c568545dcfcb03fcb875f56beddc4
+    //  data:0x0c7dff020000000000000000000000005b38da6a701c568545dcfcb03fcb875f56beddc4
+    function m1(address _address)external  {
+        emit Log(msg.data);
+    }
+}
+```
+
+![image-20221108221804689](README.assets/image-20221108221804689.png)
+
+`0x0c7dff020000000000000000000000005b38da6a701c568545dcfcb03fcb875f56beddc4`这一串数据应该如何解析呢？
+
+前四个字节是函数选择器：`0c7dff02`
+
+后面32个字节是输入的参数：`0000000000000000000000005b38da6a701c568545dcfcb03fcb875f56beddc4`
+
+而这个刚好就是我们传递进来的地址参数。
+
+**函数签名，其实就是用`函数方法名称(逗号分割出来的参数类型)`来表示。比如上述案例中的`m1(address)`就是函数签名。**
+
+**`method id`呢？是被定义为函数签名的`keccak`哈希值的前四个字节。当`selector`和`method id`相同时，便会调用该函数。**
+
+```solidity
+// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+pragma solidity ^0.8.0;
+contract SelectDemo {
+    
+    event Log(bytes data);
+
+    //当我们调用m1方法时，传递过去的完整参数会保存在msg.data全局变量中
+    // 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
+    // input:0x0c7dff020000000000000000000000005b38da6a701c568545dcfcb03fcb875f56beddc4
+    //  data:0x0c7dff020000000000000000000000005b38da6a701c568545dcfcb03fcb875f56beddc4
+    //  selector:0x0c7dff02
+    //  address:0x0000000000000000000000005b38da6a701c568545dcfcb03fcb875f56beddc4
+    function m1(address _address)external  {
+        emit Log(msg.data);
+    }
+
+    //验证一下返回值是否是上面的selector 0x0c7dff02
+    function m2() external pure returns (bytes4 sele){
+        sele = bytes4(keccak256("m1(address)"));
+    }
+}
+```
+

@@ -1,0 +1,85 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "Log",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					}
+				],
+				"name": "m1",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "m2",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "sele",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"SelectorDemo.sol": "SelectDemo"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"SelectorDemo.sol": {
+			"keccak256": "0x59e78ee5f4392bdf8968cf030204656bfd4ecb81af4cf7a616e58475286a8675",
+			"license": "SEE LICENSE IN LICENSE",
+			"urls": [
+				"bzz-raw://84d187fd68b33416a50aa4fdf9bcc143b9e1916ec9705f13c4fe9b22b47564d9",
+				"dweb:/ipfs/QmZvNczkqLHApuCDUDk4JpBYUh7pEGoBimFbzu8ENc15P6"
+			]
+		}
+	},
+	"version": 1
+}
